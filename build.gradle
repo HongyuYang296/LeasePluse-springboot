@@ -7,11 +7,6 @@ plugins {
 group = 'com.leasepluse'
 version = '0.0.1-SNAPSHOT'
 
-jar {
-    baseName = 'myapp'
-}
-
-
 java {
     toolchain {
         languageVersion = JavaLanguageVersion.of(17)
@@ -39,4 +34,9 @@ dependencies {
 
 tasks.named('test') {
     useJUnitPlatform()
+}
+
+// Corrected jar task configuration
+tasks.jar {
+    archiveBaseName.set("myapp")
 }

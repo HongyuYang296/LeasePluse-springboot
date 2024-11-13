@@ -47,6 +47,10 @@ public class SalaryPackageService {
                     limit *= 0.8; // 80% for part-time
                 }
                 break;
+            default:
+                // Default case to handle unexpected company types
+                limit = 0;
+                break;
         }
         return limit;
     }

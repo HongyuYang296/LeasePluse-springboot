@@ -7,7 +7,7 @@ import org.springframework.stereotype.Service;
 public class SalaryPackageService {
 
     public double calculateLimit(Employee employee) {
-        double limit = 0;
+        double limit;
         switch (employee.getCompanyType()) {
             case "Corporate":
                 if (employee.getEmploymentType().equals("Casual")) {

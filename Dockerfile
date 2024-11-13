@@ -17,7 +17,7 @@ RUN chmod +x ./gradlew
 RUN ./gradlew build -x test
 
 # Start with a clean, smaller runtime image
-FROM openjdk:17-jre-slim
+FROM openjdk:17-jdk-slim
 WORKDIR /app
 COPY --from=build /app/build/libs/*.jar app.jar
 EXPOSE 8080

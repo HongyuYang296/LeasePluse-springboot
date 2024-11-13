@@ -1,5 +1,5 @@
 # Use a base image with Java 17
-FROM openjdk:17-jdk as build
+FROM openjdk:17-jdk-slim as build
 
 WORKDIR /app
 

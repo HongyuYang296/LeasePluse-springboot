@@ -32,11 +32,15 @@ dependencies {
     testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
 }
 
-tasks.named('test') {
-    useJUnitPlatform()
+// Enable bootJar and disable the standard jar task to avoid non-executable JAR
+tasks.named('bootJar') {
+    enabled = true
 }
 
-// Corrected jar task configuration
-tasks.jar {
-    archiveBaseName.set("myapp")
+tasks.named('jar') {
+    enabled = false
+}
+
+tasks.named('test') {
+    useJUnitPlatform()
 }

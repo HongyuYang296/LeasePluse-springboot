@@ -1,24 +1,29 @@
-# Use a base image with Java 17
+# Use the Gradle image to build the app
 FROM openjdk:17-jdk-slim as build
 
+# Set the working directory
 WORKDIR /app
 
-# Copy your build configuration files
-COPY gradlew .
+# Copy Gradle wrapper and project files
+COPY gradlew ./
 COPY gradle gradle
 COPY build.gradle .
 COPY settings.gradle .
 COPY src src
 
-# Give execution rights on the gradlew
+# Make the Gradle wrapper executable and run bootJar
 RUN chmod +x ./gradlew
+RUN ./gradlew clean bootJar -x test  # This will create an executable JAR
 
-# Build the application skipping tests
-RUN ./gradlew build -x test
-
-# Start with a clean, smaller runtime image
+# Production image
 FROM openjdk:17-jdk-slim
 WORKDIR /app
+
+# Copy the JAR from the build stage
 COPY --from=build /app/build/libs/*.jar app.jar
+
+# Expose the application port
 EXPOSE 8080
+
+# Run the JAR
 ENTRYPOINT ["java", "-jar", "app.jar"]

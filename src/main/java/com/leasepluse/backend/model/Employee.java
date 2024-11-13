@@ -8,5 +8,5 @@ public class Employee {
     private String employmentType;
     private double salary;
     private int hoursWorked; // Only for part-time
-    private boolean isEducated;
+    private boolean educated;
 }
